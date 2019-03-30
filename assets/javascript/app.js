@@ -1,10 +1,11 @@
 $(document).ready(function () {
 
-    var questionCount = 0;
+    var triviaCount = 0;
     var correctCount = 0;
     var wrongCount = 0;
-    var userInput = '';
-    
+    var correctOption;
+    var userInput;
+
     var timerDisplay = $('#timer-display');
     var timer = 20;
 
@@ -12,41 +13,39 @@ $(document).ready(function () {
     var trivia = [
         {
             question: 'Which state is the birthplace of cheeseburgers?',
+            returnQ: ' is the birthplace of cheeseburgers.',
             options: ['California', 'Colorado', 'Texas', 'New York'],
             answer: 1
         }, {
             question: 'Which US state is the only one that grows coffee?',
+            returnQ: ' is the only US state where coffee is grown.',
             options: ['Hawaii', 'Florida', 'Nevada', 'California'],
             answer: 0
         }, {
             question: 'What is the state fruit of New York?',
-            options1: ['Watermelon', '', 'Apple','Banana'],
+            returnQ: ' is the fruit state of New York',
+            options: ['Watermelon', 'Kiwi', 'Apple', 'Banana'],
             answer: 3
         }
     ]
 
     questionSet();
 
-    // Evaluate clicked option
-    $('.options').on('click', function () {
-        console.log(this);
-        console.log($(this).attr('id'));
-        $('#answer-modal').modal('show');
-
-    });
-
     // Create question & answers
     function questionSet() {
-        var setNum = 'set' + questionCount;
+        var setNum = 'set' + triviaCount;
         var random = Math.floor(Math.random() * trivia.length);
         var randomSet = trivia[random];
+        correctOption = randomSet.answer;
 
         // generate question
         $('#question').html(randomSet.question);
+        console.log(random);
+        console.log(correctOption);
 
         // generate answers
         for (var i = 0; i < 4; i++) {
-            var idName = 'choice' + i;
+            var idName = i;
             $('<div>')
                 .addClass('options')
                 .attr('id', idName)
@@ -54,8 +53,35 @@ $(document).ready(function () {
                 .appendTo('#options-wrapper');
         }
 
-        questionCount++;
+        // set up modal to display answer
+        $('#correct-answer').html(randomSet.options[randomSet.answer]);
+        $('#question-return').html(randomSet.returnQ);
+
+        triviaCount++;
     }
+
+    // Evaluate clicked option
+    $('.options').on('click', function () {
+        console.log(this);
+        console.log($(this).attr('id'));
+        userInput = $(this).attr('id');
+        
+        // modal popup to display status - correct || incorrect
+        $('#answer-modal').modal('show');
+        if (userInput == correctOption) {
+            $('#modal-status').html('Correct!');
+            $('#correct-answer').addClass('text-info');
+        } else {
+            $('#modal-status').html('Incorrect!');
+            $('#correct-answer').addClass('text-danger');
+        }
+
+        
+
+
+
+
+    });
 
 
 });
