@@ -23,57 +23,32 @@
                     <hr class="my-4 w-75">
 
                     <div id="options-wrapper" class="row">
-                        <div class="col-sm-12 col-md-8 mx-auto px-5 text-left">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="option1">
-                                <label class="form-check-label" for="option1">
-                                    First option
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="option2">
-                                <label class="form-check-label" for="option2">
-                                    Second option
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="option3">
-                                <label class="form-check-label" for="option3">
-                                    Third option
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="option4">
-                                <label class="form-check-label" for="option4">
-                                    Forth option
-                                </label>
-                            </div>
+                        <div class="col-sm-12 col-md-12 mx-auto px-5">
+                            <div class="options" id="choice1">Choice 1</div>
+                            <div class="options" id="choice2">Choice 2</div>
+                            <div class="options" id="choice3">Choice 3</div>
+                            <div class="options" id="choice4">Choice 4</div>
                         </div>
                     </div> <!-- row - options-wrapper -->
                     
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
                 </div> <!-- jumbotron end -->
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                <div class="modal fade" id="answer-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="answer-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal-answer">Answer</h5>
+                                <h2 class="modal-title" id="modal-answer">Correct!</h2>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h2 id="status">Correct!</h2>
+                                <h3 id="status">
+                                    <span id="correct-answer">This choice </span>
+                                    <span id="question-answered">is the correct answer.</span>
+                                </h3>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

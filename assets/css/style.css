@@ -1,0 +1,12 @@
+.options {
+    background-color: #9fd4ff;
+    font-size: 1.25rem;
+    margin: 15px 0;
+    padding: 10px 5px;
+    cursor: pointer;
+    width: 100%;
+}
+.options:hover {
+    border: #4f9cdb solid 3px;
+    padding: 7px 5px;
+}
