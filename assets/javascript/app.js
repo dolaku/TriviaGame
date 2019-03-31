@@ -5,11 +5,13 @@ $(document).ready(function () {
     var triviaCount = 0;
     var correctCount = 0;
     var wrongCount = 0;
+    var unanswered = 0;
     var correctOption;
     var userInput;
 
-    var timerDisplay = $('#timer-display');
-    var timer = 20;
+    var timerRunning = false;
+    var timer = 21;
+    var intervalId;
 
     // Array of question objects 
     var trivia = [
@@ -31,21 +33,54 @@ $(document).ready(function () {
         }
     ]
 
-    if (!gameStart) {
 
-        $('#start-btn').on('click', function() {
-            $(this).addClass('d-none');
-            questionSet();
-            evalInput();
-            startTimer();
-        });
-        
-        gameStart = true;
+    $('#start-btn').on('click', function () {
+        $(this).addClass('d-none');
+        questionSet();
+        runTimer();
+        decrement();
+        evalInput();
+    });
+
+    $('#answer-modal').on('hidden.bs.modal', function (e) {
+        $('#options-wrapper').empty();
+        questionSet();
+        runTimer();
+        decrement();
+        evalInput();
+    });
+
+
+    // Timer started
+    function runTimer() {
+        $('#timer-display').html(timer + ' seconds left');
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+        timerRunning = true;
     }
 
-    // Timer
-    function startTimer() {
-        $('#timer-display').html(timer + ' seconds');
+    // Timer stopped
+    function stop() {
+        timerRunning = false;
+        clearInterval(intervalId);
+    }
+
+    // Timer counting down
+    function decrement() {
+        timer--;
+        $('#timer-display')
+            .css('color', '#777')
+            .html(timer + ' seconds left');
+
+        // Once number hits zero
+        if (timer === 0) {
+            $('#timer-display')
+                .css('color', '#aaa')
+                .html("Time's up!");
+            $('#answer-modal').modal('show');
+            stop();
+            unanswered++;
+        }
     }
 
 
@@ -79,8 +114,9 @@ $(document).ready(function () {
     }
 
     // Evaluate clicked option
-    function evalInput(){
+    function evalInput() {
         $('.options').on('click', function () {
+            
             console.log(this);
             console.log($(this).attr('id'));
             userInput = $(this).attr('id');
@@ -88,14 +124,19 @@ $(document).ready(function () {
             // modal popup to display status - correct || incorrect
             $('#answer-modal').modal('show');
             if (userInput == correctOption) {
+                stop();
+                correctCount++;
                 $('#modal-status').html('Correct!');
                 $('#correct-answer').addClass('text-info');
             } else {
+                stop();
+                wrongCount++;
                 $('#modal-status').html('Incorrect!');
                 $('#correct-answer').addClass('text-danger');
-            }    
+            }
         });
     }
+
 
 
 });
