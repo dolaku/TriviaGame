@@ -97,7 +97,7 @@ $(document).ready(function () {
             options: ['Peanuts', 'Pickles', 'Corn', 'Coconuts'],
             answer: 0
         }, {
-            question: 'What can you do whilst chopping an onion will stop your eyes from watering?',
+            question: 'What can you do whilst chopping an onion to stop your eyes from watering?',
             returnQ: ' whilst chopping an onion will stop your eyes from watering.',
             options: ['Biting a wooden spoon ', 'Yawning', 'Standing on one leg', 'Blinking really fast'],
             answer: 0
@@ -123,7 +123,7 @@ $(document).ready(function () {
 
     // After closing a modal,
     $('#answer-modal').on('hidden.bs.modal', function () {
-        timer = 5;
+        timer = 21;
         $('#options-wrapper').empty();
         $('#correct-answer')
             .removeClass('text-info')
@@ -205,7 +205,7 @@ $(document).ready(function () {
     function decrement() {
         timer--;
         $('#timer-display')
-            .css('color', '#777')
+            .css('color', '#bfe2ff')
             .html(timer + ' seconds left');
 
         // Once number hits zero, show modal with correct answer
