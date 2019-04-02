@@ -175,6 +175,7 @@ $(document).ready(function () {
                 $('#correct-answer').removeClass('d-none');
                 $('#question-return').removeClass('d-none');
                 $('.scores-wrapper').remove();
+                trivia = JSON.parse(data);
                 correctCount = 0;
                 wrongCount = 0;
                 skippedCount = 0;
@@ -232,16 +233,16 @@ $(document).ready(function () {
     function questionSet() {
         // chooses a random index to generate question set
         var randomIndex = Math.floor(Math.random() * trivia.length);
-        
+
         // pulls question from cloned-library to eliminate duplicate questions
         var removedArr = trivia.splice(randomIndex, 1);
         var randomSet = removedArr[0];
-        
+
         // generate question
         $('#question').html(randomSet.question);
-        
-        
-        
+
+
+
         // generate answer choices
         for (var i = 0; i < 4; i++) {
             var idName = i;
