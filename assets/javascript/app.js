@@ -12,10 +12,8 @@ $(document).ready(function () {
     var timer = 21;
     var intervalId;
 
-    var triviaUsed = [];
-
     // Array of question objects
-    var trivia = [
+    var data = JSON.stringify([
         {
             question: 'Which state is the birthplace of cheeseburgers?',
             returnQ: ' is the birthplace of cheeseburgers.',
@@ -113,7 +111,10 @@ $(document).ready(function () {
         //     options: ['', '', '', ''],
         //     answer: 2
         // }
-    ]
+    ]);
+
+    // clone of array question sets
+    var trivia = JSON.parse(data);
 
 
     $('.start-btn').on('click', function () {
@@ -184,7 +185,6 @@ $(document).ready(function () {
                 runGame();
             });
 
-            return false;
         }
     }
 
@@ -211,7 +211,7 @@ $(document).ready(function () {
         // Once number hits zero, show modal with correct answer
         if (timer === 0) {
             $('#timer-display')
-                .css('color', '#aaa')
+                .css('color', '#eee')
                 .html("Time's up!");
             $('#modal-status')
                 .addClass('text-danger')
@@ -235,7 +235,8 @@ $(document).ready(function () {
     function questionSet() {
         // chooses a random index to generate question set
         var randomIndex = Math.floor(Math.random() * trivia.length);
-        var randomSet = trivia[randomIndex];
+        var removedArr = trivia.splice(randomIndex, 1);
+        var randomSet = removedArr[0];
         correctOption = randomSet.answer;
 
         // generate question
