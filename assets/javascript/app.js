@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    var gameStart = false;
-
     var correctCount = 0;
     var wrongCount = 0;
     var skippedCount = 0;
@@ -113,7 +111,7 @@ $(document).ready(function () {
         // }
     ]);
 
-    // clone of array question sets
+    // Clone of array question sets - to be manipulated
     var trivia = JSON.parse(data);
 
 
@@ -184,7 +182,6 @@ $(document).ready(function () {
 
                 runGame();
             });
-
         }
     }
 
@@ -235,17 +232,17 @@ $(document).ready(function () {
     function questionSet() {
         // chooses a random index to generate question set
         var randomIndex = Math.floor(Math.random() * trivia.length);
+        
+        // pulls question from cloned-library to eliminate duplicate questions
         var removedArr = trivia.splice(randomIndex, 1);
         var randomSet = removedArr[0];
-        correctOption = randomSet.answer;
-
+        
         // generate question
         $('#question').html(randomSet.question);
-
-        // pulls question from the library to eliminate duplicate questions
-
-
-        // generate answers
+        
+        
+        
+        // generate answer choices
         for (var i = 0; i < 4; i++) {
             var idName = i;
             $('<div>')
@@ -254,6 +251,7 @@ $(document).ready(function () {
                 .html(randomSet.options[i])
                 .appendTo('#options-wrapper');
         }
+        correctOption = randomSet.answer;
 
         // set up modal to display answer
         $('#correct-answer').html(randomSet.options[randomSet.answer]);
