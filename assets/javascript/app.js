@@ -29,7 +29,7 @@ $(document).ready(function () {
             answer: 2
         }, {
             question: 'How many flowers are in the design stamped on each side of an Oreo cookie?',
-            returnQ: ' flowers, each with four petals, are stamped on each Oreo cookie.',
+            returnQ: ' flowers with four petals each, are stamped on an Oreo cookie.',
             options: ['4', '15', '8', '12'],
             answer: 3
         }, {
@@ -53,7 +53,7 @@ $(document).ready(function () {
             options: ['Eight', 'Six', 'Five', 'Four'],
             answer: 1
         }, {
-            question: 'How many taste buds do we have?',
+            question: 'How many types of taste buds do we have?',
             returnQ: '<br>Sweet<br>Sour<br>Salty<br>Bitter<br>Umami',
             options: ['Three', 'Four', 'Five', 'Six'],
             answer: 2
